@@ -36,7 +36,7 @@
         <!-- 配置最上传文件的支持 20M -->
         <property name="maxUploadSize" value="20971520"></property>
         <!-- 设置文件上传的临时目录 -->
-        <property name="uploadTempDir" value="/resources/image" />
+        <property name="uploadTempDir" value="/resources/images" />
     </bean>
 
 

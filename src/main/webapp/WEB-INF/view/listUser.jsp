@@ -32,7 +32,7 @@
 <body class="sticky-header">
 
 <jsp:include page="leftSideMenu.jsp">
-    <jsp:param name="menuActive" value="personMenu"/>
+    <jsp:param name="menuActive" value="userMenu"/>
 </jsp:include>
 
 
@@ -57,7 +57,7 @@
                         <li><a href="#"> <i class="fa fa-wrench"></i> Settings </a></li>
                         <li><a href="#"> <i class="fa fa-user"></i> Profile </a></li>
                         <li><a href="#"> <i class="fa fa-info"></i> Help </a></li>
-                        <li><a href="/manage/logout.do"> <i class="fa fa-lock"></i> Logout </a></li>
+                        <li><a href="#"> <i class="fa fa-lock"></i> Logout </a></li>
                     </ul>
                 </li>
             </ul>
@@ -74,54 +74,61 @@
 
         <!--Start Page Title-->
         <div class="page-title-box">
-            <h4 class="page-title">个人管理</h4>
+            <h4 class="page-title">用户管理</h4>
             <div class="clearfix"></div>
         </div>
         <!--End Page Title-->
 
-        <!--修改个人信息 start-->
+
+        <!--用户列表-->
         <div class="row">
             <div class="col-md-12">
                 <div class="white-box">
-                    <h2 class="header-title">个人信息修改</h2>
-                    <form class="js-validation-bootstrap form-horizontal" action="#"
-                          method="post">
-                        <%--昵称--%>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="nickname">昵称</label>
-                            <div class="col-md-9">
-                                <input class="form-control" type="text" id="nickname" name="nickname"
-                                       placeholder="换个好听的昵称？">
-                            </div>
-                        </div>
-                        <%--性别--%>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="sex">性别</label>
-                            <div class="col-md-9">
-                                <select class="form-control" id="sex">
-                                    <option value="1" name="sex">男生</option>
-                                    <option value="0" name="sex">女生</option>
-                                </select>
-                            </div>
-                        </div>
-                        <%--修改头像--%>
-                        <div class="form-group">
-                            <label class="col-md-3 control-label" for="sex">头像</label>
-                            <div class="col-md-9">
-                                <input type="file" class="fileupload">
-                            </div>
-                        </div>
-                        <%--提交表单--%>
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-3">
-                                <button class="btn  btn-primary" type="submit">提交</button>
-                            </div>
-                        </div>
-                    </form>
+                    <h2 class="header-title">用户列表</h2>
+                    <div class="table-wrap">
+                        <table class="table table table-hover m-0">
+                            <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>用户名称</th>
+                                <th>用户密码</th>
+                                <th>用户昵称</th>
+                                <th>性别</th>
+                                <th>操作</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th scope="row">1</th>
+                                <td>wmhwmh</td>
+                                <td>123</td>
+                                <td>Mark</td>
+                                <td>男</td>
+                                <td><a href="#">修改</a>/<a href="#">删除</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>asdasd</td>
+                                <td>456</td>
+                                <td>Karis</td>
+                                <td>女</td>
+                                <td><a href="#">修改</a>/<a href="#">删除</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>zxczxc</td>
+                                <td>789</td>
+                                <td>Sara</td>
+                                <td>女</td>
+                                <td><a href="#">修改</a>/<a href="#">删除</a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <!--修改个人信息 end -->
+        <!--用户列表 end -->
 
     </div>
     <!-- End Wrapper-->

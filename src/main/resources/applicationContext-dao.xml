@@ -45,7 +45,7 @@
         <!--注入mapper接口所在的包-->
         <property name="basePackage">
             <value>
-                com.mapper
+                com.dao
             </value>
         </property>
         <!--注入sqlSessionFactory-->

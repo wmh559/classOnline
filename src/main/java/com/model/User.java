@@ -1,5 +1,7 @@
 package com.model;
 
+import javax.persistence.Table;
+import javax.persistence.Transient;
 import java.io.Serializable;
 
 /**
@@ -9,15 +11,26 @@ import java.io.Serializable;
  * @date 2020/1/6
  * @time 15:03
  */
+@Table(name = "tbs_user")
 public class User implements Serializable {
     private int id;
     private String username;
     private String password;
     private String nickname;
-    private String profile_photo;
+    private String profilePhoto;
     private int sex;
-    private int role_type;
+    private int roleType;
+    @Transient
+    private boolean rememberMe;  //记住密码
 
+
+    public boolean isRememberMe() {
+        return rememberMe;
+    }
+
+    public void setRememberMe(boolean rememberMe) {
+        this.rememberMe = rememberMe;
+    }
 
     public int getId() {
         return id;
@@ -51,12 +64,12 @@ public class User implements Serializable {
         this.nickname = nickname;
     }
 
-    public String getProfile_photo() {
-        return profile_photo;
+    public String getProfilePhoto() {
+        return profilePhoto;
     }
 
-    public void setProfile_photo(String profile_photo) {
-        this.profile_photo = profile_photo;
+    public void setProfilePhoto(String profilePhoto) {
+        this.profilePhoto = profilePhoto;
     }
 
     public int getSex() {
@@ -67,11 +80,11 @@ public class User implements Serializable {
         this.sex = sex;
     }
 
-    public int getRole_type() {
-        return role_type;
+    public int getRoleType() {
+        return roleType;
     }
 
-    public void setRole_type(int role_type) {
-        this.role_type = role_type;
+    public void setRoleType(int roleType) {
+        this.roleType = roleType;
     }
 }

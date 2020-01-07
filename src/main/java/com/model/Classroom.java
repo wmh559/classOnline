@@ -12,10 +12,10 @@ import java.util.Date;
  */
 public class Classroom implements Serializable {
     private int id;
-    private int create_uid;
+    private int createUid;
     private String name;
     private String picture;
-    private Date create_time;
+    private Date createTime;
 
 
     public int getId() {
@@ -26,12 +26,12 @@ public class Classroom implements Serializable {
         this.id = id;
     }
 
-    public int getCreate_uid() {
-        return create_uid;
+    public int getCreateUid() {
+        return createUid;
     }
 
-    public void setCreate_uid(int create_uid) {
-        this.create_uid = create_uid;
+    public void setCreateUid(int createUid) {
+        this.createUid = createUid;
     }
 
     public String getName() {
@@ -50,11 +50,11 @@ public class Classroom implements Serializable {
         this.picture = picture;
     }
 
-    public Date getCreate_time() {
-        return create_time;
+    public Date getCreateTime() {
+        return createTime;
     }
 
-    public void setCreate_time(Date create_time) {
-        this.create_time = create_time;
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }

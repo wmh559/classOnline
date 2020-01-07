@@ -74,7 +74,7 @@
 
         <!--Start Page Title-->
         <div class="page-title-box">
-            <h4 class="page-title">Dashboard1 </h4>
+            <h4 class="page-title">个人管理</h4>
             <div class="clearfix"></div>
         </div>
         <!--End Page Title-->

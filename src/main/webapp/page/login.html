@@ -2,96 +2,200 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="keywords" content="">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" href="/resources/images/favicon.png" type="image/png">
-  <title></title>
-   <link href="/resources/css/icons.css" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="/resources/images/favicon.png" type="image/png">
+    <title></title>
+    <!-- BEGIN CODE LEVEL STYLES -->
+    <link href="/resources/css/icons.css" rel="stylesheet">
     <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
     <link href="/resources/css/style.css" rel="stylesheet">
     <link href="/resources/css/responsive.css" rel="stylesheet">
-    
+    <!-- END CODE LEVEL STYLES -->
+
+
+    <!-- BEGIN PAGE LEVEL STYLES -->
+    <link href="/resources/plugins/sweetalert/sweetalert.css" rel="stylesheet"/>
+    <!-- END PAGE LEVEL STYLES -->
+
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-          <script src="js/html5shiv.min.js"></script>
-          <script src="js/respond.min.js"></script>
+    <script src="js/html5shiv.min.js"></script>
+    <script src="js/respond.min.js"></script>
     <![endif]-->
 
 </head>
 
 <body class="sticky-header">
 
- 
- <!--Start login Section-->
-  <section class="login-section">
-       <div class="container">
-           <div class="row">
-               <div class="login-wrapper">
-                   <div class="login-inner">
-                       
-                       <div class="logo">
-                         <img src="/resources/images/logo-dark.png"  alt="logo"/>
-                       </div>
-                   		
-                   		<h2 class="header-title text-center">用户登录</h2>
-                        
-                       <form>
-                           <div class="form-group">
-                               <input type="text" class="form-control"  placeholder="用户名" name="username">
-                           </div>
-                           
-                           <div class="form-group">
-                               <input type="text" class="form-control"  placeholder="登录密码" name="password">
-                           </div>
 
-						<div class="form-group">
-                           <div class="pull-left">
-                            <div class="checkbox primary">
-                              <input  id="checkbox-2" type="checkbox" name="rememberMe">
-                              <label for="checkbox-2">记住我</label>
-                            </div>
-                           </div>
-                           
-                           <div class="pull-right">
-                           	   <a href="reset-password.html" class="a-link">
-                               <i class="fa fa-unlock-alt"></i> 忘记密码
-                               </a>
-                           </div>
-                         </div>
-                          
-                           <div class="form-group">
-                               <input type="submit" value="登录" class="btn btn-primary btn-block" >
-                           </div>
-                           
-                           <div class="form-group text-center">
-                            还未注册账号？  <a href="registration.html">创建一个</a>
-                           </div>
-                           
-                       </form>
-                       
-                        <div class="copy-text"> 
-                         <p class="m-0">2017 &copy; Meter admin</p>
+<!--Start login Section-->
+<section class="login-section">
+    <div class="container">
+        <div class="row">
+            <div class="login-wrapper">
+                <div class="login-inner">
+
+                    <div class="logo">
+                        <img src="/resources/images/logo-dark.png" alt="logo"/>
+                    </div>
+
+                    <h2 class="header-title text-center">用户登录</h2>
+
+                    <form action="/manage/toIndex.do" method="post" accept-charset="UTF-8" id="loginForm">
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="用户名" name="username" id="username">
                         </div>
-                    
-                   </div>
-               </div>
-               
-           </div>
-       </div>
-  </section>
- <!--End login Section-->
+
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="登录密码" name="password" id="password">
+                        </div>
+
+                        <div class="form-group">
+                            <div class="pull-left">
+                                <div class="checkbox primary">
+                                    <input id="rememberMe" type="checkbox" name="rememberMe">
+                                    <label for="rememberMe">记住我</label>
+                                </div>
+                            </div>
+
+                            <div class="pull-right">
+                                <a href="reset-password.html" class="a-link">
+                                    <i class="fa fa-unlock-alt"></i> 忘记密码
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="button" value="登录" class="btn btn-primary btn-block" id="loginBtn">
+                        </div>
+
+                        <div class="form-group text-center">
+                            还未注册账号？ <a href="registration.html">创建一个</a>
+                        </div>
+
+                    </form>
+
+                    <div class="copy-text">
+                        <p class="m-0">2017 &copy; Meter admin</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!--End login Section-->
 
 
+<!--Begin core plugin -->
+<script src="/resources/js/jquery.min.js"></script>
+<script src="/resources/js/bootstrap.min.js"></script>
+<script src="/resources/plugins/moment/moment.js"></script>
+<script src="/resources/js/jquery.slimscroll.js "></script>
+<script src="/resources/js/jquery.nicescroll.js"></script>
+<script src="/resources/js/functions.js"></script>
+<!-- End core plugin -->
+
+<!-- BEGIN sweetalert LEVEL SCRIPTS -->
+<script src="/resources/plugins/sweetalert/sweet-alert.js"></script>
+<script src="/resources/pages/jquery.sweet-alert.custom.js"></script>
+<!-- BEGIN sweetalert LEVEL SCRIPTS -->
+
+<!--Begin page level js-->
+<script type="text/javascript">
+
+    !function ($) {
+        "use strict";
+
+        var SweetAlert = function () {
+        };
+
+        //examples
+        SweetAlert.prototype.init = function () {
 
 
-    <!--Begin core plugin -->
-    <script src="/resources/js/jquery.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <!-- End core plugin -->
+            /*登陆前检验数据*/
+            $('#loginBtn').click(function () {
+                var username = $("#username").val().trim();
+                var password = $("#password").val().trim();
+                var rememberMe = $("#rememberMe")[0].checked;
+                if (username.length == 0 || password.length == 0) {
+                    swal("用户名或密码不能为空！");
+                    return;
+                }
+
+                /**
+                 * 返回data类型
+                 * {successed ： true | false} 登录是否成功
+                 * {errStatus : 1 |　2 | 3} 当successed为false会有errStatus错误状态信息
+                 * 其中 1：该用户名还没有注册
+                 *     2：密码错误
+                 *     3：用户名或者密码为空（防止第三方插件登录）
+                 */
+                $.ajax({
+                    type: "POST",
+                    url: "/reply/login.do",
+                    data: JSON.stringify({"username": username, "password": password, "rememberMe": rememberMe}),
+                    dataType: "json",
+                    contentType: "application/json",
+                    success: function (data) {
+                        console.log(data);
+                        if (data.successed) {
+                            // swal("搞定了!", "登陆成功.", "success");
+                            swal({
+                                title: "搞定了!",
+                                text: "登陆成功",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "OK",
+                                closeOnConfirm: false
+                            }, function(){
+                                $("#loginForm").submit();
+                                return;
+                            });
+
+                            return;
+                        } else {
+                            var errStatus = data.status;
+                            if (errStatus == 1) {
+                                swal("该用户名还没有注册！");
+                                return;
+                            } else if (errStatus == 2) {
+                                swal("密码错误！");
+                                return;
+                            } else if (errStatus == 3) {
+                                swal("用户名或者密码为空！");
+                                return;
+                            }
+                        }
+
+                    }
+
+                })
+            });
+
+
+        },
+            //init
+            $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
+    }(window.jQuery),
+
+        //initializing
+        function ($) {
+            "use strict";
+            $.SweetAlert.init()
+        }(window.jQuery);
+
+
+</script>
+<!--end page level js-->
 
 </body>
 

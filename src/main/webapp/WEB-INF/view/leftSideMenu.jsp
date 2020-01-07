@@ -41,21 +41,21 @@
 
             <li class="menu-list" id="questionMenu"><a href="#"><i class="ion-android-textsms"></i> <span>问题管理</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="#">创建问题</a></li>
-                    <li><a href="#">问题列表</a></li>
+                    <li><a href="/manage/toCreateQuestion.do">创建问题</a></li>
+                    <li><a href="/manage/toListQuestion.do">问题列表</a></li>
                 </ul>
             </li>
 
             <li class="menu-list" id="roleMenu"><a href="#"><i class="ion-android-hand"></i> <span>权限管理</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="#">修改用户权限</a></li>
+                    <li><a href="/manage/toListRole.do">修改用户权限</a></li>
                 </ul>
             </li>
 
 
             <li class="menu-list" id="userMenu"><a href="#"><i class="ion-android-person"></i> <span>用户管理</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="#">用户列表</a></li>
+                    <li><a href="/manage/toListUser.do">用户列表</a></li>
                 </ul>
             </li>
         </ul>

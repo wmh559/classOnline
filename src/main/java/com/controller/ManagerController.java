@@ -55,6 +55,20 @@ public class ManagerController {
         return "listUser";
     }
 
+
+    @RequestMapping("toCreateClass")
+    @LoginRequired
+    public String toCreateClass() {
+        return "createClass";
+    }
+
+    @RequestMapping("toListClass")
+    @LoginRequired
+    public String toListClass() {
+        return "listClass";
+    }
+
+
     @RequestMapping("/logout")
     public String logout(HttpServletRequest request, HttpServletResponse response) {
         request.getSession().invalidate();

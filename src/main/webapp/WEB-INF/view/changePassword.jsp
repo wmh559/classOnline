@@ -68,14 +68,14 @@
             <div class="col-md-12">
                 <div class="white-box">
                     <h2 class="header-title">个人信息修改</h2>
-                    <form class="js-validation-bootstrap form-horizontal" action="#"
-                          method="post">
+                    <form class="js-validation-bootstrap form-horizontal" action="" accept-charset="UTF-8"
+                          method="post" id="changeForm">
                         <%--旧密码--%>
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="oldPassword">原始密码<span
                                     class="text-danger">*</span></label>
                             <div class="col-md-9">
-                                <input class="form-control" type="password" id="oldPassword" name="oldPassword"
+                                <input class="form-control" type="password" id="oldPassword"
                                        placeholder="输入你的旧密码">
                             </div>
                         </div>
@@ -93,14 +93,14 @@
                             <label class="col-md-3 control-label" for="confirmPassword">确认密码<span
                                     class="text-danger">*</span></label>
                             <div class="col-md-9">
-                                <input class="form-control" type="password" id="confirmPassword" name="confirmPassword"
+                                <input class="form-control" type="password" id="confirmPassword"
                                        placeholder="再输入一遍">
                             </div>
                         </div>
                         <%--提交表单--%>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-3">
-                                <button class="btn  btn-primary" type="submit">提交</button>
+                                <button class="btn  btn-primary" type="button" id="submit_btn">提交</button>
                             </div>
                         </div>
                     </form>
@@ -127,10 +127,132 @@
 <!-- End core plugin -->
 
 <!--Begin Page Level Plugin-->
-<script src="/resources/plugins/morris-chart/raphael-min.js"></script>
-<script src="/resources/plugins/jquery-sparkline/jquery.charts-sparkline.js"></script>
+<script src="/resources/plugins/sweetalert/sweet-alert.js"></script>
+<script src="/resources/pages/jquery.sweet-alert.custom.js"></script>
 <!--End Page Level Plugin-->
 
+<script type="text/javascript">
+    $(function () {
+        !function ($) {
+            "use strict";
+
+            var SweetAlert = function () {
+            };
+
+            //examples
+            SweetAlert.prototype.init = function () {
+
+                // 检查两个新密码是否一致
+                $('#newPassword').blur(function () {
+                    var newPassword = $('#newPassword').val().trim();
+                    var confirmPassword = $('#confirmPassword').val().trim();
+                    if (newPassword != confirmPassword) {
+                        colorChange($('#newPassword'), 'error');
+                        colorChange($('#confirmPassword'), 'error');
+                        return;
+                    } else {
+                        colorChange($('#newPassword'), 'success');
+                        colorChange($('#confirmPassword'), 'success');
+                    }
+                });
+                $('#confirmPassword').blur(function () {
+                    var newPassword = $('#newPassword').val().trim();
+                    var confirmPassword = $('#confirmPassword').val().trim();
+                    if (newPassword != confirmPassword) {
+                        colorChange($('#newPassword'), 'error');
+                        colorChange($('#confirmPassword'), 'error');
+                        return;
+                    } else {
+                        colorChange($('#newPassword'), 'success');
+                        colorChange($('#confirmPassword'), 'success');
+                    }
+                });
+                /**
+                 * 检验密码一致
+                 */
+                $('#submit_btn').click(function () {
+                    var oldPassword = $('#oldPassword').val().trim();
+                    var newPassword = $('#newPassword').val().trim();
+                    var confirmPassword = $('#confirmPassword').val().trim();
+                    if (newPassword != confirmPassword) {
+                        swal("新密码不一致");
+                        return;
+                    }
+
+                    $.ajax({
+                        type:"POST",
+                        url:"/manage/reply/validatePassword.do",
+                        data:{"oldPassword":oldPassword},
+                        success:function (data) {
+                            console.log(data);
+                            if (data.status) {
+                                colorChange($('#oldPassword'), 'success');
+
+                                $.ajax({
+                                    type:"POST",
+                                    url:"/manage/changeInformation.do",
+                                    data:JSON.stringify({"password":newPassword}),
+                                    dataType:"json",
+                                    contentType:"application/json",
+                                    success:function (data) {
+                                        if (data.successed) {
+                                            swal({
+                                                title: "搞定了!",
+                                                text: "修改成功",
+                                                type: "success",
+                                                showCancelButton: false,
+                                                confirmButtonColor: "#DD6B55",
+                                                confirmButtonText: "OK",
+                                                closeOnConfirm: false
+                                            }, function(){
+                                                window.location = "/manage/toChangePassword.do";
+                                                return;
+                                            });
+                                        }
+                                        if (data.status == 1) {
+                                            swal("修改失败");
+                                        }
+                                    }
+                                })
+
+                            } else {
+                                colorChange($('#oldPassword'),'error');
+                                return;
+                            }
+                        }
+                    })
+
+                });
+
+
+                function colorChange(node,color) {
+                    if (color == 'success') {
+                        node[0].parentNode.parentNode.classList.remove('has-error');
+                        node[0].parentNode.parentNode.classList.add('has-success');
+                    } else {
+                        node[0].parentNode.parentNode.classList.remove('has-success')
+                        node[0].parentNode.parentNode.classList.add('has-error');
+                    }
+
+                }
+
+
+            },
+                //init
+                $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
+        }(window.jQuery),
+
+            //initializing
+            function ($) {
+                "use strict";
+                $.SweetAlert.init()
+            }(window.jQuery);
+
+    })
+
+
+
+</script>
 
 </body>
 

@@ -34,8 +34,8 @@
 
             <li class="menu-list" id="classMenu"><a href="#"><i class="ion-android-people"></i> <span>班级管理</span></a>
                 <ul class="sub-menu-list">
-                    <li><a href="#">创建班级</a></li>
-                    <li><a href="#">班级列表</a></li>
+                    <li><a href="/manage/toCreateClass.do">创建班级</a></li>
+                    <li><a href="/manage/toListClass.do">班级列表</a></li>
                 </ul>
             </li>
 

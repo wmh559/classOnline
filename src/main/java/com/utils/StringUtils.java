@@ -8,7 +8,7 @@ package com.utils;
  */
 public class StringUtils {
     public static boolean isBlank(String str) {
-        if (str.equals("") || str.equals(null)) {
+        if (str == null || str.equals("")) {
             return true;
         } else {
             return false;

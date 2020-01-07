@@ -68,8 +68,8 @@
             <div class="col-md-12">
                 <div class="white-box">
                     <h2 class="header-title">个人信息修改</h2>
-                    <form class="js-validation-bootstrap form-horizontal" action="#"
-                          method="post">
+                    <form class="js-validation-bootstrap form-horizontal" action="" accept-charset="UTF-8"
+                          method="post" id="changeForm">
                         <%--昵称--%>
                         <div class="form-group">
                             <label class="col-md-3 control-label" for="nickname">昵称</label>
@@ -83,7 +83,7 @@
                             <label class="col-md-3 control-label" for="sex">性别</label>
                             <div class="col-md-9">
                                 <select class="form-control" id="sex">
-                                    <option value="1" name="sex">男生</option>
+                                    <option value="1" name="sex" selected>男生</option>
                                     <option value="0" name="sex">女生</option>
                                 </select>
                             </div>
@@ -98,7 +98,7 @@
                         <%--提交表单--%>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-3">
-                                <button class="btn  btn-primary" type="submit">提交</button>
+                                <button class="btn  btn-primary" type="button" id="submit_btn">提交</button>
                             </div>
                         </div>
                     </form>
@@ -125,10 +125,64 @@
 <!-- End core plugin -->
 
 <!--Begin Page Level Plugin-->
-<script src="/resources/plugins/morris-chart/raphael-min.js"></script>
-<script src="/resources/plugins/jquery-sparkline/jquery.charts-sparkline.js"></script>
+<script src="/resources/plugins/sweetalert/sweet-alert.js"></script>
+<script src="/resources/pages/jquery.sweet-alert.custom.js"></script>
 <!--End Page Level Plugin-->
 
+<script type="text/javascript">
+    !function ($) {
+        "use strict";
+
+        var SweetAlert = function () {
+        };
+
+        //examples
+        SweetAlert.prototype.init = function () {
+
+            $('#submit_btn').click(function () {
+                var nickname = $('#nickname').val().trim();
+                var sex = $('#sex')[0].value;
+                $.ajax({
+                    type:"POST",
+                    url:"/manage/changeInformation.do",
+                    data: JSON.stringify({"nickname": nickname, "sex": sex}),
+                    dataType:"json",
+                    contentType:"application/json",
+                    success:function (data) {
+                        if (data.successed) {
+                            swal({
+                                title: "搞定了!",
+                                text: "修改成功",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "OK",
+                                closeOnConfirm: false
+                            }, function(){
+                                window.location = "/manage/toIndex.do";
+                                return;
+                            });
+                        }
+                        if (data.status == 1) {
+                            swal("修改失败");
+                        }
+                    }
+                })
+            })
+
+
+
+        },
+            //init
+            $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
+    }(window.jQuery),
+
+        //initializing
+        function ($) {
+            "use strict";
+            $.SweetAlert.init()
+        }(window.jQuery);
+</script>
 
 </body>
 

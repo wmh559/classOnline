@@ -1,7 +1,6 @@
 package com.model;
 
-import javax.persistence.Table;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.Serializable;
 
 /**
@@ -13,13 +12,15 @@ import java.io.Serializable;
  */
 @Table(name = "tbs_user")
 public class User implements Serializable{
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String username;
     private String password;
     private String nickname;
     private String profilePhoto;
-    private int sex;
-    private int roleType;
+    private Integer sex;
+    private Integer roleType;
     @Transient
     private boolean rememberMe;  //记住密码
 
@@ -72,19 +73,19 @@ public class User implements Serializable{
         this.profilePhoto = profilePhoto;
     }
 
-    public int getSex() {
+    public Integer getSex() {
         return sex;
     }
 
-    public void setSex(int sex) {
+    public void setSex(Integer sex) {
         this.sex = sex;
     }
 
-    public int getRoleType() {
+    public Integer getRoleType() {
         return roleType;
     }
 
-    public void setRoleType(int roleType) {
+    public void setRoleType(Integer roleType) {
         this.roleType = roleType;
     }
 }

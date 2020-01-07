@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -82,30 +83,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>wmhwmh</td>
-                                <td>123</td>
-                                <td>Mark</td>
-                                <td>男</td>
-                                <td><a href="#">修改</a>/<a href="#">删除</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>asdasd</td>
-                                <td>456</td>
-                                <td>Karis</td>
-                                <td>女</td>
-                                <td><a href="#">修改</a>/<a href="#">删除</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>zxczxc</td>
-                                <td>789</td>
-                                <td>Sara</td>
-                                <td>女</td>
-                                <td><a href="#">修改</a>/<a href="#">删除</a></td>
-                            </tr>
+
+                            <c:if test="${userList!=null}">
+                                <c:forEach var="u" items="${userList}">
+                                    <tr>
+                                        <th scope="row">${u.id}</th>
+                                        <td>${u.username}</td>
+                                        <td>${u.password}</td>
+                                        <td>${u.nickname}</td>
+                                        <td>${u.sex == 1 ? '男' : '女'}</td>
+                                        <td><a href="#">修改</a>/<a href="#">删除</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
+
                             </tbody>
                         </table>
                     </div>

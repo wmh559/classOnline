@@ -1,5 +1,8 @@
 package com.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,6 +14,8 @@ import java.util.Date;
  * @time 15:07
  */
 public class Classroom implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int createUid;
     private String name;

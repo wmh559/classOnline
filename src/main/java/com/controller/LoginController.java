@@ -1,10 +1,10 @@
 package com.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.fasterxml.jackson.core.io.JsonStringEncoder;
 import com.model.ReplyLoginMessage;
 import com.model.User;
 import com.service.UserService;
-import com.service.impl.UserServiceImpl;
 import com.utils.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 
 /**
  * 登录与注册
@@ -31,10 +33,11 @@ public class LoginController {
 
     /**
      * 返回前端ajax登陆消息
+     *
      * @param user
      * @return
      */
-    @RequestMapping(value = "/reply/login",method = RequestMethod.POST)
+    @RequestMapping(value = "/reply/login", method = RequestMethod.POST)
     @ResponseBody
     public ReplyLoginMessage replyLoginMessage(@RequestBody User user, HttpServletRequest request, HttpServletResponse response) {
         if (StringUtils.isBlank(user.getUsername()) || StringUtils.isBlank(user.getPassword())) {
@@ -52,10 +55,19 @@ public class LoginController {
 
         request.getSession().setAttribute("user", res);
         if (user.isRememberMe()) {
-            Cookie cookie = new Cookie("user", JSON.toJSONString(res));
-            cookie.setMaxAge(60*60); //保存1小时
-            response.addCookie(cookie);
+            String jsonString = null;
+            try {
+                jsonString = URLEncoder.encode(JSON.toJSONString(res), "utf-8");
+                Cookie cookie = new Cookie("user", jsonString);
+                cookie.setMaxAge(60 * 60); //保存1小时
+                cookie.setPath("/");
+                response.addCookie(cookie);
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
         }
+
         return new ReplyLoginMessage(true);
     }
 }

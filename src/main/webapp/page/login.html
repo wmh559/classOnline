@@ -173,6 +173,9 @@
                             } else if (errStatus == 3) {
                                 swal("用户名或者密码为空！");
                                 return;
+                            } else {
+                                swal("服务器出现异常，稍后重试");
+                                return;
                             }
                         }
 

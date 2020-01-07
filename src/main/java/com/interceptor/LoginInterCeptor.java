@@ -10,6 +10,7 @@ import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.net.URLDecoder;
 
 /**
  * @author Atom
@@ -20,13 +21,14 @@ import javax.servlet.http.HttpServletResponse;
 public class LoginInterCeptor extends HandlerInterceptorAdapter {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-        System.out.println("登陆拦截器拦截方法...");
         HandlerMethod method = (HandlerMethod) handler;
         LoginRequired methodAnnotation = method.getMethodAnnotation(LoginRequired.class);
         if (methodAnnotation == null) {  //没有标注LoginRequired的方法
+            System.out.println("登陆拦截器不拦截该方法 -> " + method.toString());
             return true;
         }
 
+        System.out.println("登陆拦截器拦截该方法 -> " + method.toString());
         boolean needLogin = methodAnnotation.needLogin();
         if (needLogin) {  //需要登陆
             User user = (User) request.getSession().getAttribute("user");
@@ -35,7 +37,8 @@ public class LoginInterCeptor extends HandlerInterceptorAdapter {
                 Cookie[] cookies = request.getCookies();
                 for (Cookie cookie : cookies) {
                     if (cookie.getName().equals("user")) {
-                        User cookieUser = JSON.parseObject(cookie.getValue(), User.class);
+                        String jsonString = URLDecoder.decode(cookie.getValue(),"utf-8");
+                        User cookieUser = JSON.parseObject(jsonString, User.class);
                         request.getSession().setAttribute("user",cookieUser);
                         return true;
                     }

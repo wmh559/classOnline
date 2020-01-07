@@ -12,8 +12,8 @@ import java.io.Serializable;
  * @time 15:03
  */
 @Table(name = "tbs_user")
-public class User implements Serializable {
-    private int id;
+public class User implements Serializable{
+    private Integer id;
     private String username;
     private String password;
     private String nickname;
@@ -32,11 +32,11 @@ public class User implements Serializable {
         this.rememberMe = rememberMe;
     }
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 

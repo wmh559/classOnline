@@ -62,6 +62,7 @@ public class ManagerController {
         for (Cookie cookie : cookies) {
             if (cookie.getName().equals("user")) {
                 cookie.setMaxAge(0);  //销毁cookie
+                cookie.setPath("/");
                 response.addCookie(cookie);
             }
         }

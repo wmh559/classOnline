@@ -18,10 +18,7 @@
                 <span class="caret"></span>
             </a>
             <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                <li><a href="#"> <i class="fa fa-wrench"></i> Settings </a></li>
-                <li><a href="#"> <i class="fa fa-user"></i> Profile </a></li>
-                <li><a href="#"> <i class="fa fa-info"></i> Help </a></li>
-                <li><a href="/manage/logout.do"> <i class="fa fa-lock"></i> Logout </a></li>
+                <li><a href="/manage/logout.do"> <i class="fa fa-lock"></i>退出</a></li>
             </ul>
         </li>
     </ul>

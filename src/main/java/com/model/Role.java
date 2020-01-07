@@ -1,5 +1,8 @@
 package com.model;
 
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
 /**
@@ -10,6 +13,8 @@ import java.io.Serializable;
  * @time 15:09
  */
 public class Role implements Serializable {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String roleName;
 

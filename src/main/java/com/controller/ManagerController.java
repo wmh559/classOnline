@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -306,6 +307,19 @@ public class ManagerController {
             userService.changeUser(user);
         }
         return "redirect:/manage/toListRole.do";
+    }
+    //更改密码
+    @ResponseBody
+    @RequestMapping("/resetPassword")
+    public int ChangePassword(@RequestBody User user){
+        int i=userService.changeUser(user);
+        return i;
+    }
+
+    @RequestMapping("/deleteUser")
+    public void deleteUser(int id,HttpServletResponse response) throws IOException {
+        int i = userService.deleteUser(id);
+        response.sendRedirect("/manage/toListUser.do");
     }
 
 }

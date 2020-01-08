@@ -75,4 +75,14 @@ public class ClassServiceImpl implements ClassService {
     public void deleteClassById(Integer id) {
         classDao.deleteByPrimaryKey(id);
     }
+
+    @Override
+    public Classroom isExistClass(String classid) {
+        return classDao.selectByPrimaryKey(classid);
+    }
+
+    @Override
+    public void joinClass(Integer cid, Integer uid) {
+        classDao.joinClass(cid, uid);
+    }
 }

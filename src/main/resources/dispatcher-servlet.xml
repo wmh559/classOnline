@@ -24,6 +24,7 @@
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/manage/*.do"/>
+            <mvc:mapping path="/chat/*.do"/>
             <bean class="com.interceptor.LoginInterCeptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

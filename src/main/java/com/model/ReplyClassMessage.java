@@ -12,6 +12,9 @@ import java.io.Serializable;
 public class ReplyClassMessage implements Serializable {
     public static final int CLASS_CREATED_ERROR = 1; //创建班级失败
     public static final int CLASS_DELETED_ERROR = 2; //删除班级失败
+    public static final int CLASS_NOT_EXIST = 3; //不存在该班级
+    public static final int CLASS_FULL_ERROR = 4; //班级满人
+    public static final int CLASS_JOIN_ERROR = 5; //加入班级异常
 
     private boolean successed;
     private int status;

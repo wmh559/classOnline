@@ -1,4 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -80,27 +81,18 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>先有鸡还是先有蛋？</td>
-                                <td>先有鸡还是先有蛋？先有鸡还是先有蛋？</td>
-                                <td><a href="#">修改</a>/<a href="#">删除</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>中午吃啥？</td>
-                                <td>中午吃啥？中午吃啥？中午吃啥？</td>
-                                <td><a href="#">修改</a>/<a href="#">删除</a></td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>晚饭吃啥？</td>
-                                <td>晚饭吃啥？晚饭吃啥？晚饭吃啥？</td>
-                                <td><a href="#">修改</a>/<a href="#">删除</a></td>
-                            </tr>
+                            <c:if test="${questionList!=null}">
+                                <c:forEach var="question" items="${questionList}">
+                                    <tr>
+                                        <th scope="row">${question.id}</th>
+                                        <td>${question.user.nickname}</td>
+                                        <td>${question.title}</td>
+                                        <td>${question.description}</td>
+                                        <td><a href="#"  onclick="alterClass(this)" data-toggle="modal" data-target="#exampleModal"  questionid="${question.id}">修改</a>/<a href="<c:url value="/manage/deleteQuestion.do?id=${question.id}" /> ">删除</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
+
                             </tbody>
                         </table>
                     </div>
@@ -113,9 +105,42 @@
     </div>
     <!-- End Wrapper-->
 
-
 </div>
 <!--End main content -->
+
+<%--修改班级信息弹窗 start--%>
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="exampleModalLabel">修改问题内容</h4>
+            </div>
+            <form action="/manage/changeQuestion.do" method="post">
+                <div class="modal-body">
+
+                    <div class="form-group">
+                        <input type="hidden" class="form-control" name="id" id="formid" value="">
+                    </div>
+                    <div class="form-group">
+                        <label for="questionTitle" class="control-label">标题:</label>
+                        <input type="text" class="form-control" id="questionTitle" name="title">
+                    </div>
+                    <div class="form-group">
+                        <label for="questionDescription" class="control-label">描述:</label>
+                        <textarea id="questionDescription" name="description" class="form-control"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                    <button type="submit" class="btn btn-primary">提交</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<%--修改班级信息弹窗 end--%>
 
 
 <!--Begin core plugin -->
@@ -133,6 +158,25 @@
 <!--End Page Level Plugin-->
 
 
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        // var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('修改问题内容 ')
+    })
+
+    // 更改提交表单的id
+    function alterClass(element) {
+        var attr = $(element).attr("questionid");
+        $('#formid').attr("value",attr)
+        console.log(attr)
+    }
+
+</script>
 </body>
 
 </html>

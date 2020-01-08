@@ -9,18 +9,18 @@ import java.io.Serializable;
  * @date 2020/1/8
  * @time 0:04
  */
-public class ReplyChangeMessage implements Serializable {
-    public static final int CHANGE_ERROR = 1; //输入密码无效
-
+public class ReplyClassMessage implements Serializable {
+    public static final int CLASS_CREATED_ERROR = 1; //创建班级失败
+    public static final int CLASS_DELETED_ERROR = 2; //删除班级失败
 
     private boolean successed;
     private int status;
 
-    public ReplyChangeMessage(boolean successed) {
+    public ReplyClassMessage(boolean successed) {
         this.successed = successed;
     }
 
-    public ReplyChangeMessage(boolean successed, int status) {
+    public ReplyClassMessage(boolean successed, int status) {
         this.successed = successed;
         this.status = status;
     }

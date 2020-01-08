@@ -53,24 +53,10 @@
         <a class="toggle-btn"><i class="fa fa-bars"></i></a>
 
         <!--个人信息栏 start -->
-        <div class="menu-right">
-            <ul class="notification-menu">
-                <li>
-                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <img src="/resources/images/users/avatar-6.jpg" alt=""/>
-                        John Doe
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                        <li><a href="#"> <i class="fa fa-wrench"></i> Settings </a></li>
-                        <li><a href="#"> <i class="fa fa-user"></i> Profile </a></li>
-                        <li><a href="#"> <i class="fa fa-info"></i> Help </a></li>
-                        <li><a href="#"> <i class="fa fa-lock"></i> Logout </a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        <jsp:include page="menuRight.jsp"/>
         <!--个人信息栏 end -->
+
+
     </div>
     <!-- header section end-->
 
@@ -93,27 +79,29 @@
             <h2 class="header-title">班级创建</h2>
             <form class="js-validation-bootstrap form-horizontal" action="#"
                   method="post">
+                <%--创建人id--%>
+                <input type="hidden" id="createUid" value="${sessionScope.user.id}" />
                 <%--班级名称--%>
                 <div class="form-group">
-                    <label class="col-md-3 control-label" for="nickname">班级名称<span
+                    <label class="col-md-3 control-label" for="classname">班级名称<span
                             class="text-danger">*</span></label>
                     <div class="col-md-9">
-                        <input class="form-control" type="text" id="nickname" name="nickname"
-                               placeholder="请输入班级名称">
+                        <input class="form-control" type="text" id="classname" name="name"
+                               placeholder="请输入班级名称" required>
                     </div>
                 </div>
                 <%--上传班级头像--%>
                 <div class="form-group">
-                    <label class="col-md-3 control-label" for="nickname">头像<span
+                    <label class="col-md-3 control-label" for="picture">班徽<span
                             class="text-danger">*</span></label>
                     <div class="col-md-9">
-                        <input type="file" class="fileupload">
+                        <input type="file" class="fileupload" name="picture" id="picture">
                     </div>
                 </div>
                 <%--提交表单--%>
                 <div class="form-group">
                     <div class="col-md-8 col-md-offset-3">
-                        <button class="btn  btn-primary" type="submit">提交</button>
+                        <button class="btn  btn-primary" type="button" id="submit_btn">提交</button>
                     </div>
                 </div>
             </form>
@@ -133,11 +121,72 @@
 <!-- End core plugin -->
 
 <!--Begin Page Level Plugin-->
-<script src="/resources/plugins/morris-chart/raphael-min.js"></script>
-<script src="/resources/plugins/jquery-sparkline/jquery.charts-sparkline.js"></script>
+<script src="/resources/plugins/sweetalert/sweet-alert.js"></script>
+<script src="/resources/pages/jquery.sweet-alert.custom.js"></script>
 <!--End Page Level Plugin-->
 
+<!--Begin page level js-->
+<script type="text/javascript">
 
+    !function ($) {
+        "use strict";
+
+        var SweetAlert = function () {
+        };
+
+        //examples
+        SweetAlert.prototype.init = function () {
+
+
+            /*登陆前检验数据*/
+            $('#submit_btn').click(function () {
+                var classname = $('#classname').val().trim();
+                var createUid = $('#createUid').val().trim();
+                $.ajax({
+                    type:"POST",
+                    url:"/manage/createClass.do",
+                    data:JSON.stringify({"createUid":createUid,"name":classname}),
+                    dataType:"json",
+                    contentType:"application/json",
+                    success:function (data) {
+                        if (data.successed) {
+                            swal({
+                                title: "搞定了!",
+                                text: "创建成功",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "OK",
+                                closeOnConfirm: false
+                            }, function(){
+                                window.location="/manage/toCreateClass.do";
+                                return;
+                            });
+
+                            return;
+                        }else {
+                            swal("创建失败");
+                            return;
+                        }
+                    }
+                })
+            })
+
+
+        },
+            //init
+            $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
+    }(window.jQuery),
+
+        //initializing
+        function ($) {
+            "use strict";
+            $.SweetAlert.init()
+        }(window.jQuery);
+
+
+</script>
+<!--end page level js-->
 </body>
 
 </html>

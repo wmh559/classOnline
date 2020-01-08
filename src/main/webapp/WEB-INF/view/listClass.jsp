@@ -5,7 +5,8 @@
   Time: 15:15
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 
@@ -17,9 +18,9 @@
     <meta name="author" content="">
     <link rel="icon" href="/resources/images/favicon.png" type="image/png">
     <%--修改页面css样式--%>
-    <link href="resources/css/bootstrap.min.css" rel="stylesheet">
-    <script src="resources/js/jquery.min.js"></script>
-    <script src="resources/js/bootstrap.min.js"></script>
+    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <script src="/resources/js/jquery.min.js"></script>
+    <script src="/resources/js/bootstrap.min.js"></script>
     <%--修改页面css样式--%>
     <title>Home</title>
 
@@ -35,8 +36,8 @@
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
-    <script src="js/html5shiv.min.js"></script>
-    <script src="js/respond.min.js"></script>
+    <script src="/resources/js/html5shiv.min.js"></script>
+    <script src="/resources/js/respond.min.js"></script>
     <![endif]-->
 
 </head>
@@ -58,24 +59,10 @@
         <a class="toggle-btn"><i class="fa fa-bars"></i></a>
 
         <!--个人信息栏 start -->
-        <div class="menu-right">
-            <ul class="notification-menu">
-                <li>
-                    <a href="#" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-                        <img src="/resources/images/users/avatar-6.jpg" alt=""/>
-                        John Doe
-                        <span class="caret"></span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-usermenu pull-right">
-                        <li><a href="#"> <i class="fa fa-wrench"></i> Settings </a></li>
-                        <li><a href="#"> <i class="fa fa-user"></i> Profile </a></li>
-                        <li><a href="#"> <i class="fa fa-info"></i> Help </a></li>
-                        <li><a href="#"> <i class="fa fa-lock"></i> Logout </a></li>
-                    </ul>
-                </li>
-            </ul>
-        </div>
+        <jsp:include page="menuRight.jsp"/>
         <!--个人信息栏 end -->
+
+
     </div>
     <!-- header section end-->
 
@@ -106,24 +93,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr>
-                                <td>1715491</td>
-                                <td>软工一班</td>
-                                <td>李梅生老师</td>
-                                <td><a href="#"  data-toggle="modal" data-target="#exampleModal">修改</a>/<a href="#">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>1715492</td>
-                                <td>软工二班</td>
-                                <td>郭艺辉老师</td>
-                                <td><a href="#"  data-toggle="modal" data-target="#exampleModal">修改</a>/<a href="#">删除</a></td>
-                            </tr>
-                            <tr>
-                                <td>1715493</td>
-                                <td>软工三班</td>
-                                <td>庄敏娟老师</td>
-                                <td><a href="#"  data-toggle="modal" data-target="#exampleModal">修改</a>/<a href="#">删除</a></td>
-                            </tr>
+                            <c:if test="${classroomList!=null}">
+                                <c:forEach var="c" items="${classroomList}">
+                                    <tr>
+                                        <td>${c.id}</td>
+                                        <td>${c.name}</td>
+                                        <td>${c.user.nickname}</td>
+                                        <td><a href="#"  onclick="alterClass(this)" data-toggle="modal" data-target="#exampleModal"  classid="${c.id}">修改</a>/<a href="<c:url value="/manage/deleteClass.do?id=${c.id}" />">删除</a></td>
+                                    </tr>
+                                </c:forEach>
+                            </c:if>
                             </tbody>
                         </table>
                     </div>
@@ -135,7 +114,7 @@
     </div>
 </div>
 
-<%--修改班级信息--%>
+<%--修改班级信息弹窗--%>
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -143,35 +122,31 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="exampleModalLabel">修改班级信息</h4>
             </div>
+            <form action="/manage/changeClass.do" method="post">
             <div class="modal-body">
-                <form>
+
                     <div class="form-group">
-                        <label for="recipient-name" class="control-label">班级名称:</label>
-                        <input type="text" class="form-control" id="recipient-name">
+                        <input type="hidden" class="form-control" name="id" id="formid" value="">
                     </div>
                     <div class="form-group">
-                        <label for="message-text" class="control-label">头像:</label>
-                        <input type="file" id="message-text"/>
+                        <label for="classname" class="control-label">班级名称:</label>
+                        <input type="text" class="form-control" id="classname" name="name">
                     </div>
-                </form>
+                    <div class="form-group">
+                        <label for="picture" class="control-label">班徽:</label>
+                        <input type="file" id="picture" name="picture"/>
+                    </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                <button type="button" class="btn btn-primary">提交</button>
+                <button type="submit" class="btn btn-primary">提交</button>
             </div>
+            </form>
+
         </div>
     </div>
 </div>
-<script>
-    $('#exampleModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget) // Button that triggered the modal
-        // var recipient = button.data('whatever') // Extract info from data-* attributes
-        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-        var modal = $(this)
-        modal.find('.modal-title').text('修改班级信息 ')
-    })
-</script>
+
 <%--修改班级信息--%>
 <script src="/resources/js/jquery.min.js"></script>
 <script src="/resources/js/bootstrap.min.js"></script>
@@ -185,6 +160,25 @@
 <script src="/resources/plugins/morris-chart/raphael-min.js"></script>
 <script src="/resources/plugins/jquery-sparkline/jquery.charts-sparkline.js"></script>
 <!--End Page Level Plugin-->
+
+<script>
+    $('#exampleModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget) // Button that triggered the modal
+        // var recipient = button.data('whatever') // Extract info from data-* attributes
+        // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+        // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+        var modal = $(this)
+        modal.find('.modal-title').text('修改班级信息 ')
+    })
+
+    // 更改提交表单的id
+    function alterClass(element) {
+        var attr = $(element).attr("classid");
+        $('#formid').attr("value",attr)
+        console.log(attr)
+    }
+
+</script>
 
 
 </body>

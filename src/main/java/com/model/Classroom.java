@@ -1,8 +1,6 @@
 package com.model;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -13,29 +11,40 @@ import java.util.Date;
  * @date 2020/1/6
  * @time 15:07
  */
+@Table(name = "tbs_classroom")
 public class Classroom implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-    private int createUid;
+    private Integer id;
+    private Integer createUid;
     private String name;
     private String picture;
     private Date createTime;
+    @Transient
+    private User user;
 
 
-    public int getId() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
-    public int getCreateUid() {
+    public Integer getCreateUid() {
         return createUid;
     }
 
-    public void setCreateUid(int createUid) {
+    public void setCreateUid(Integer createUid) {
         this.createUid = createUid;
     }
 

@@ -79,4 +79,10 @@ public class UserServiceImpl implements UserService {
         int influenceCount = userDao.updateByPrimaryKeySelective(user);
         return influenceCount;
     }
+
+    @Override
+    public int deleteUser(int id){
+        int i=userDao.deleteByPrimaryKey(id);
+        return i;
+    }
 }

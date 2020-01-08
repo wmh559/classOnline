@@ -19,4 +19,6 @@ public interface UserService {
     List<User> selectAll();
 
     int changeUser(User user);
+
+    int deleteUser(int password);
 }

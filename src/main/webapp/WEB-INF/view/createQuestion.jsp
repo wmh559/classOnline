@@ -75,7 +75,7 @@
                             <label class="col-md-3 control-label" for="uid">发起人id<span
                                     class="text-danger">*</span></label>
                             <div class="col-md-9">
-                                <input class="form-control" type="text" id="uid" name="uid">
+                                <input class="form-control" type="text" id="uid" name="uid" value="${sessionScope.user.id}" readonly>
                             </div>
                         </div>
                         <%--问题标题--%>
@@ -98,7 +98,7 @@
                         <%--提交表单--%>
                         <div class="form-group">
                             <div class="col-md-8 col-md-offset-3">
-                                <button class="btn  btn-primary" type="submit">创建</button>
+                                <button class="btn  btn-primary" type="button" id="submit_btn">创建</button>
                             </div>
                         </div>
                     </form>
@@ -129,7 +129,74 @@
 <script src="/resources/plugins/jquery-sparkline/jquery.charts-sparkline.js"></script>
 <!--End Page Level Plugin-->
 
+<!--Begin Page Level Plugin-->
+<script src="/resources/plugins/sweetalert/sweet-alert.js"></script>
+<script src="/resources/pages/jquery.sweet-alert.custom.js"></script>
+<!--End Page Level Plugin-->
 
+<!--Begin page level js-->
+<script type="text/javascript">
+
+    !function ($) {
+        "use strict";
+
+        var SweetAlert = function () {
+        };
+
+        //examples
+        SweetAlert.prototype.init = function () {
+
+
+            /*登陆前检验数据*/
+            $('#submit_btn').click(function () {
+                var uid = $('#uid').val().trim();
+                var title = $('#title').val().trim();
+                var description = $('#description').val().trim();
+                $.ajax({
+                    type:"POST",
+                    url:"/manage/createQuestion.do",
+                    data:JSON.stringify({"uid":uid,"title":title,"description":description}),
+                    dataType:"json",
+                    contentType:"application/json",
+                    success:function (data) {
+                        if (data.successed) {
+                            swal({
+                                title: "搞定了!",
+                                text: "创建成功",
+                                type: "success",
+                                showCancelButton: false,
+                                confirmButtonColor: "#DD6B55",
+                                confirmButtonText: "OK",
+                                closeOnConfirm: false
+                            }, function(){
+                                window.location="/manage/toCreateQuestion.do";
+                                return;
+                            });
+
+                            return;
+                        }else {
+                            swal("创建失败");
+                            return;
+                        }
+                    }
+                })
+            })
+
+
+        },
+            //init
+            $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
+    }(window.jQuery),
+
+        //initializing
+        function ($) {
+            "use strict";
+            $.SweetAlert.init()
+        }(window.jQuery);
+
+
+</script>
+<!--end page level js-->
 </body>
 
 </html>

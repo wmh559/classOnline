@@ -85,4 +85,17 @@ public class UserServiceImpl implements UserService {
         int i=userDao.deleteByPrimaryKey(id);
         return i;
     }
+
+    @Override
+    public int insertUser(User user){
+        return userDao.insert(user);
+    }
+
+    @Override
+    public int selectUserByName(String name){
+        Example example=new Example(User.class);
+        Example.Criteria criteria=example.createCriteria();
+        criteria.andEqualTo("username",name);
+        return userDao.selectCountByExample(example);
+    }
 }

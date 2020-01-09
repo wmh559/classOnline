@@ -74,7 +74,7 @@ public class QuestionServiceImpl implements QuestionService {
     public List<Question> selectAll(Integer id) {
         Example example = new Example(Question.class);
         Example.Criteria criteria = example.createCriteria();
-        criteria.andCondition("uid", id);
+        criteria.andCondition("uid=", id);
         List<Question> questionList = questionDao.selectByExample(example);
         for (Question question : questionList) {
             User user = userDao.selectByPrimaryKey(question.getUid());

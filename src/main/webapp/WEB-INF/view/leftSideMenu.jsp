@@ -6,6 +6,8 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 
 <body>
@@ -25,39 +27,91 @@
     <div class="left-side-inner">
         <!--Sidebar nav-->
         <ul class="nav nav-pills nav-stacked custom-nav">
-            <li class="menu-list" id="personMenu"><a href="index.jsp"><i class="icon-home"></i> <span>个人</span></a>
-                <ul class="sub-menu-list">
-                    <li><a href="/manage/toIndex.do">修改个人信息</a></li>
-                    <li><a href="/manage/toChangePassword.do">修改密码</a></li>
-                </ul>
-            </li>
+            <c:if test="${sessionScope.user.menuList != null}">
+                <c:forEach var="m0" items="${sessionScope.user.menuList}">
+                    <c:if test="${m0.id == 1}">
+                        <li class="menu-list" id="personMenu"><a href="index.jsp"><i class="${m0.iconUrl}"></i> <span>${m0.title}</span></a>
+                            <ul class="sub-menu-list">
+                                <c:forEach var="m1" items="${sessionScope.user.menuList}">
+                                    <c:if test="${m1.parentId == 1}">
+                                        <li><a href="${m1.url}">${m1.title}</a></li>
+                                    </c:if>
+                                </c:forEach>
 
-            <li class="menu-list" id="classMenu"><a href="#"><i class="ion-android-people"></i> <span>班级管理</span></a>
-                <ul class="sub-menu-list">
-                    <li><a href="/manage/toCreateClass.do">创建班级</a></li>
-                    <li><a href="/manage/toListClass.do">班级列表</a></li>
-                </ul>
-            </li>
+<%--                                <li><a href="/manage/toChangePassword.do">修改密码</a></li>--%>
+                            </ul>
+                        </li>
+                    </c:if>
+                </c:forEach>
+            </c:if>
+            <c:if test="${sessionScope.user.menuList != null}">
+                <c:forEach var="m0" items="${sessionScope.user.menuList}">
+                    <c:if test="${m0.id == 2}">
+                        <li class="menu-list" id="classMenu"><a href="index.jsp"><i class="${m0.iconUrl}"></i> <span>${m0.title}</span></a>
+                            <ul class="sub-menu-list">
+                                <c:forEach var="m1" items="${sessionScope.user.menuList}">
+                                    <c:if test="${m1.parentId == 2}">
+                                        <li><a href="${m1.url}">${m1.title}</a></li>
+                                    </c:if>
+                                </c:forEach>
 
-            <li class="menu-list" id="questionMenu"><a href="#"><i class="ion-android-textsms"></i> <span>问题管理</span></a>
-                <ul class="sub-menu-list">
-                    <li><a href="/manage/toCreateQuestion.do">创建问题</a></li>
-                    <li><a href="/manage/toListQuestion.do">问题列表</a></li>
-                </ul>
-            </li>
+                                    <%--                                <li><a href="/manage/toChangePassword.do">修改密码</a></li>--%>
+                            </ul>
+                        </li>
+                    </c:if>
+                </c:forEach>
+            </c:if>
+            <c:if test="${sessionScope.user.menuList != null}">
+                <c:forEach var="m0" items="${sessionScope.user.menuList}">
+                    <c:if test="${m0.id == 3}">
+                        <li class="menu-list" id="questionMenu"><a href="index.jsp"><i class="${m0.iconUrl}"></i> <span>${m0.title}</span></a>
+                            <ul class="sub-menu-list">
+                                <c:forEach var="m1" items="${sessionScope.user.menuList}">
+                                    <c:if test="${m1.parentId == 3}">
+                                        <li><a href="${m1.url}">${m1.title}</a></li>
+                                    </c:if>
+                                </c:forEach>
 
-            <li class="menu-list" id="roleMenu"><a href="#"><i class="ion-android-hand"></i> <span>权限管理</span></a>
-                <ul class="sub-menu-list">
-                    <li><a href="/manage/toListRole.do">修改用户权限</a></li>
-                </ul>
-            </li>
+                                    <%--                                <li><a href="/manage/toChangePassword.do">修改密码</a></li>--%>
+                            </ul>
+                        </li>
+                    </c:if>
+                </c:forEach>
+            </c:if>
+            <c:if test="${sessionScope.user.menuList != null}">
+                <c:forEach var="m0" items="${sessionScope.user.menuList}">
+                    <c:if test="${m0.id == 4}">
+                        <li class="menu-list" id="roleMenu"><a href="index.jsp"><i class="${m0.iconUrl}"></i> <span>${m0.title}</span></a>
+                            <ul class="sub-menu-list">
+                                <c:forEach var="m1" items="${sessionScope.user.menuList}">
+                                    <c:if test="${m1.parentId == 4}">
+                                        <li><a href="${m1.url}">${m1.title}</a></li>
+                                    </c:if>
+                                </c:forEach>
 
+                                    <%--                                <li><a href="/manage/toChangePassword.do">修改密码</a></li>--%>
+                            </ul>
+                        </li>
+                    </c:if>
+                </c:forEach>
+            </c:if>
+            <c:if test="${sessionScope.user.menuList != null}">
+                <c:forEach var="m0" items="${sessionScope.user.menuList}">
+                    <c:if test="${m0.id == 5}">
+                        <li class="menu-list" id="userMenu"><a href="index.jsp"><i class="${m0.iconUrl}"></i> <span>${m0.title}</span></a>
+                            <ul class="sub-menu-list">
+                                <c:forEach var="m1" items="${sessionScope.user.menuList}">
+                                    <c:if test="${m1.parentId == 5}">
+                                        <li><a href="${m1.url}">${m1.title}</a></li>
+                                    </c:if>
+                                </c:forEach>
 
-            <li class="menu-list" id="userMenu"><a href="#"><i class="ion-android-person"></i> <span>用户管理</span></a>
-                <ul class="sub-menu-list">
-                    <li><a href="/manage/toListUser.do">用户列表</a></li>
-                </ul>
-            </li>
+                                    <%--                                <li><a href="/manage/toChangePassword.do">修改密码</a></li>--%>
+                            </ul>
+                        </li>
+                    </c:if>
+                </c:forEach>
+            </c:if>
         </ul>
         <!--End sidebar nav-->
 

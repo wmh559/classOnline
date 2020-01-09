@@ -28,4 +28,8 @@ public interface ClassService {
     void changeClass(Classroom classroom);
 
     void deleteClassById(Integer id);
+
+    Classroom isExistClass(String classid);
+
+    void joinClass(Integer cid, Integer uid);
 }

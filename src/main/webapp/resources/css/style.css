@@ -1071,6 +1071,7 @@ h5.left-nav-title {
 /*--------------------------------------------*/
 
 .white-box {
+	box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
     background: #FFF;
     padding: 20px;
     float: left;
@@ -2331,11 +2332,11 @@ div.checker span {
 /*chat widget*/
 
 .inbox-scroll-list{
-	height:330px;
+	height:540px;
 }
 
 .chat-scroll-list{
-	height:300px;
+	height:506px;
 }
 
 .chat-widget ul {
@@ -2377,7 +2378,7 @@ div.checker span {
 }
 
 .chat-widget ul li.right .chat-info {
-    background: #F0F0F0;
+    background: #98e165;
     padding: 10px;
     margin-right: 65px;
 }
@@ -2391,6 +2392,10 @@ div.checker span {
 
 .chat-widget ul li .chat-info .datetime {
     color: #8f8b8b;
+}
+
+.chat-widget ul li.right .message {
+	color: #000;
 }
 
 .chat-widget ul li .chat-info .message{

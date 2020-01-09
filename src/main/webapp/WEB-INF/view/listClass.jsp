@@ -95,7 +95,10 @@
                                         <td>${c.id}</td>
                                         <td>${c.name}</td>
                                         <td>${c.user.nickname}</td>
-                                        <td><a href="#"  onclick="alterClass(this)" data-toggle="modal" data-target="#exampleModal"  classid="${c.id}">修改</a>/<a href="<c:url value="/manage/deleteClass.do?id=${c.id}" />">删除</a></td>
+                                        <td>
+                                            <a href="#"  onclick="alterClass(this)" data-toggle="modal" data-target="#exampleModal"  classid="${c.id}">修改</a>
+                                            /<a href="<c:url value="/manage/deleteClass.do?id=${c.id}" />">删除</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:if>

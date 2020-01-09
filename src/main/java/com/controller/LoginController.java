@@ -70,4 +70,18 @@ public class LoginController {
 
         return new ReplyLoginMessage(true);
     }
+
+//    注册
+    @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
+    @ResponseBody
+    public int RegisterUser(User user){
+        return userService.insertUser(user);
+    }
+//    判断用户名是否重用
+    @RequestMapping("/isRepeat")
+    @ResponseBody
+    public int isRepeat(HttpServletRequest request){
+        String name=request.getParameter("name");
+       return userService.selectUserByName(name);
+    }
 }

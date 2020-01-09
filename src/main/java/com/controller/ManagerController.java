@@ -101,9 +101,9 @@ public class ManagerController {
         } else if (user.getRoleType() == 2) {  //教师
             questionList = questionService.selectAll(user.getId());
         }
-        if (questionList != null) {
-            map.put("questionList", questionList);
-        }
+
+        map.put("questionList", questionList);
+
         return "listQuestion";
     }
 

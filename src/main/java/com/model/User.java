@@ -23,7 +23,17 @@ public class User implements Serializable{
     private Integer roleType;
     @Transient
     private boolean rememberMe;  //记住密码
+    @Transient
+    private Integer classId;  //当前所处的班级
 
+
+    public Integer getClassId() {
+        return classId;
+    }
+
+    public void setClassId(Integer classId) {
+        this.classId = classId;
+    }
 
     public boolean isRememberMe() {
         return rememberMe;

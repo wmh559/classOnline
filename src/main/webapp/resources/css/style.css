@@ -2377,7 +2377,7 @@ div.checker span {
 }
 
 .chat-widget ul li.right .chat-info {
-    background: #F0F0F0;
+    background: #98e165;
     padding: 10px;
     margin-right: 65px;
 }
@@ -2391,6 +2391,10 @@ div.checker span {
 
 .chat-widget ul li .chat-info .datetime {
     color: #8f8b8b;
+}
+
+.chat-widget ul li.right .message {
+	color: #000;
 }
 
 .chat-widget ul li .chat-info .message{

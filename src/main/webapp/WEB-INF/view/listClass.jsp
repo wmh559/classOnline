@@ -17,11 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/resources/images/favicon.png" type="image/png">
-    <%--修改页面css样式--%>
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/resources/js/jquery.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <%--修改页面css样式--%>
+
     <title>Home</title>
 
     <!--Begin  Page Level  CSS -->

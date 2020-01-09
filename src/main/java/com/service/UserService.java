@@ -21,4 +21,8 @@ public interface UserService {
     int changeUser(User user);
 
     int deleteUser(int password);
+
+    int insertUser(User user);
+
+    int selectUserByName(String name);
 }

@@ -39,21 +39,21 @@
                    		
                    		<h2 class="header-title text-center">获取一个账号</h2>
                         
-                       <form>
+                       <form action="" method="post" name="userForm" id="userForm">
                            <div class="form-group">
-                               <input type="text" class="form-control"  placeholder="用户登录名" required>
+                               <input type="text" class="form-control" id="username" name="username" placeholder="用户登录名" required>
                            </div>
 
                            <div class="form-group">
-                               <input type="text" class="form-control"  placeholder="登录密码" required>
+                               <input type="text" class="form-control" id="password" name="password" placeholder="登录密码" required>
                            </div>
 
                            <div class="form-group">
-                               <input type="text" class="form-control" placeholder="昵称">
+                               <input type="text" class="form-control" id="nickname" name="nickname" placeholder="昵称">
                            </div>
 
                            <div class="form-group">
-                               <select required class="form-control">
+                               <select required class="form-control" id="sex" name="sex">
                                    <option value="1" name="sex">男生</option>
                                    <option value="0" name="sex">女生</option>
                                </select>
@@ -69,7 +69,7 @@
                          </div>
                           
                            <div class="form-group">
-                               <input type="submit" value="注册" class="btn btn-primary btn-block" >
+                               <input type="button" value="注册" class="btn btn-primary btn-block" id="btn_submit">
                            </div>
                            
                            <div class="form-group text-center">
@@ -101,8 +101,95 @@
     <script src="/resources/js/jquery.nicescroll.js"></script>
     <script src="/resources/js/functions.js"></script>
     <!-- End core plugin -->
-       
 
+ <!-- BEGIN sweetalert LEVEL SCRIPTS -->
+ <script src="/resources/plugins/sweetalert/sweet-alert.js"></script>
+ <script src="/resources/pages/jquery.sweet-alert.custom.js"></script>
+ <!-- BEGIN sweetalert LEVEL SCRIPTS -->
+
+ <script type="text/javascript">
+     $(function () {
+         !function ($) {
+             "use strict";
+
+             var SweetAlert = function () {
+
+             };
+
+             //examples
+             SweetAlert.prototype.init = function () {
+
+                 // 检查用户名是否重复
+                 $('#username').blur(function () {
+                     var name = $('#username').val().trim();
+                     console.log(name)
+                     if (name.length!=0) {
+                         $.ajax({
+                             type:"post",
+                             url:"/isRepeat.do",
+                             data:{"name":name},
+                             success:function (data) {
+                                 if(data!=0){
+                                    swal("错误","用户名已存在","error")
+                                 }
+                             }
+
+                         })
+                     }
+                 });
+             //    发送用户注册数据
+                 $('#btn_submit').click(function () {
+                     var formData = $( '#userForm').serialize();
+                     console.log(formData)
+                     $.ajax({
+                         type:"POST",
+                         url:"/registerUser.do",
+                         data:$( '#userForm').serialize(),
+                         success:function (data) {
+                             if (data==1) {
+                                 swal({
+                                     title: "搞定了!",
+                                     text: "注册成功",
+                                     type: "success",
+                                     showCancelButton: false,
+                                     confirmButtonColor: "#DD6B55",
+                                     confirmButtonText: "OK",
+                                     closeOnConfirm: false
+                                 },function () {
+                                     window.location = "/page/login.html";
+                                 });
+
+                             }
+                             if (data.status == 0) {
+                                 swal({
+                                     title:"错误",
+                                     text: "回去再注册",
+                                     type:"error"
+                                 },function () {
+                                     window.location = "/page/registration.html";
+                                 });
+                             }
+                         }
+                     })
+
+
+                 })
+
+
+             },
+                 //init
+                 $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
+         }(window.jQuery),
+
+             //initializing
+             function ($) {
+                 "use strict";
+                 $.SweetAlert.init()
+             }(window.jQuery);
+
+     })
+
+ </script>
 </body>
 
 </html>

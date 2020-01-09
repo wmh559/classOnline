@@ -214,49 +214,6 @@
                     <input type="hidden" id="user_classId" value="${sessionScope.user.classId}">
                     <div class="chat-widget">
                         <ul class="chat-scroll-list" id="chat_content">
-                            <li class="left">
-                                <img src="/resources/images/users/avatar-6.jpg" alt=""/>
-                                <div class="chat-info">
-                                    <a class="name" href="#">Jone Doe</a>
-                                    <span class="datetime">6:12</span>
-                                    <span class="message">
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-                                    </span>
-                                </div>
-                            </li>
-
-                            <li class="right">
-                                <img src="/resources/images/users/avatar-6.jpg" alt=""/>
-                                <div class="chat-info">
-                                    <a class="name" href="#">Jone Doe</a>
-                                    <span class="datetime">6:12</span>
-                                    <span class="message">
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-                                        </span>
-                                </div>
-                            </li>
-
-                            <li class="left">
-                                <img src="/resources/images/users/avatar-6.jpg" alt=""/>
-                                <div class="chat-info">
-                                    <a class="name" href="#">Jone Doe</a>
-                                    <span class="datetime">6:12</span>
-                                    <span class="message">
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-                                        </span>
-                                </div>
-                            </li>
-
-                            <li class="right">
-                                <img src="/resources/images/users/avatar-6.jpg" alt=""/>
-                                <div class="chat-info">
-                                    <a class="name" href="#">Jone Doe</a>
-                                    <span class="datetime">6:12</span>
-                                    <span class="message">
-                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit
-                                        </span>
-                                </div>
-                            </li>
 
                         </ul>
                     </div>
@@ -266,7 +223,7 @@
                             <div class="input-group">
                                 <input class="form-control" placeholder="Say something" type="text" id="input_content">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="button" id="btn_send">发送</button>
+                                    <button class="btn btn-primary" type="button" id="btn_send" onclick="sendMessage()">发送</button>
                                 </span>
                             </div>
                         </div>

@@ -8,10 +8,7 @@ import com.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -104,9 +101,9 @@ public class ManagerController {
         } else if (user.getRoleType() == 2) {  //教师
             questionList = questionService.selectAll(user.getId());
         }
-        if (questionList != null) {
-            map.put("questionList", questionList);
-        }
+
+        map.put("questionList", questionList);
+
         return "listQuestion";
     }
 
@@ -168,10 +165,36 @@ public class ManagerController {
             map.put("classroomList", classroomList);
         }
         if (user.getRoleType() == 1) {
-            return "listAddClass";
+            return "showClass";
         }
         return "listClass";
     }
+
+    /**
+     * CLASS_NOT_EXIST  = 3; //不存在该班级
+     * CLASS_FULL_ERROR = 4; //班级满人
+     * CLASS_JOIN_ERROR = 5; //加入班级异常
+     * @param classid
+     * @param request
+     * @return
+     */
+    @RequestMapping("/validateClass/{classid}")
+    @ResponseBody
+    @LoginRequired
+    public ReplyClassMessage validateClass(@PathVariable("classid") String classid,HttpServletRequest request) {
+        Classroom classroom = classService.isExistClass(classid);
+        if (classroom == null) {
+            return new ReplyClassMessage(false, ReplyClassMessage.CLASS_NOT_EXIST);
+        }
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null || user.getId() == null) {
+            return new ReplyClassMessage(false, ReplyClassMessage.CLASS_JOIN_ERROR);
+        }
+        classService.joinClass(Integer.valueOf(classid), user.getId());
+        return new ReplyClassMessage(true);
+    }
+
+
 
     //退出登陆
     @RequestMapping("/logout")
@@ -308,15 +331,17 @@ public class ManagerController {
         }
         return "redirect:/manage/toListRole.do";
     }
-    //更改密码
+    //重置密码
     @ResponseBody
     @RequestMapping("/resetPassword")
+    @LoginRequired
     public int ChangePassword(@RequestBody User user){
-        int i=userService.changeUser(user);
-        return i;
+        return userService.changeUser(user);
     }
 
+    //删除用户
     @RequestMapping("/deleteUser")
+    @LoginRequired
     public void deleteUser(int id,HttpServletResponse response) throws IOException {
         int i = userService.deleteUser(id);
         response.sendRedirect("/manage/toListUser.do");

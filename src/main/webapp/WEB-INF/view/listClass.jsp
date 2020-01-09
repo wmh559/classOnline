@@ -17,11 +17,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link rel="icon" href="/resources/images/favicon.png" type="image/png">
-    <%--修改页面css样式--%>
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
-    <script src="/resources/js/jquery.min.js"></script>
-    <script src="/resources/js/bootstrap.min.js"></script>
-    <%--修改页面css样式--%>
+
     <title>Home</title>
 
     <!--Begin  Page Level  CSS -->
@@ -72,7 +68,7 @@
 
         <!--Start Page Title-->
         <div class="page-title-box">
-            <h4 class="page-title">Dashboard1 </h4>
+            <h4 class="page-title">班级管理</h4>
             <div class="clearfix"></div>
         </div>
         <!--End Page Title-->
@@ -99,7 +95,10 @@
                                         <td>${c.id}</td>
                                         <td>${c.name}</td>
                                         <td>${c.user.nickname}</td>
-                                        <td><a href="#"  onclick="alterClass(this)" data-toggle="modal" data-target="#exampleModal"  classid="${c.id}">修改</a>/<a href="<c:url value="/manage/deleteClass.do?id=${c.id}" />">删除</a></td>
+                                        <td>
+                                            <a href="#"  onclick="alterClass(this)" data-toggle="modal" data-target="#exampleModal"  classid="${c.id}">修改</a>
+                                            /<a href="<c:url value="/manage/deleteClass.do?id=${c.id}" />">删除</a>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:if>

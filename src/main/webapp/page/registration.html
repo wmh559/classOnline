@@ -139,7 +139,7 @@
                  });
              //    发送用户注册数据
                  $('#btn_submit').click(function () {
-                     var formData = $( '#userForm').serialize();
+                     var formData = $('#userForm').serialize();
                      console.log(formData)
                      $.ajax({
                          type:"POST",

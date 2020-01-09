@@ -75,6 +75,11 @@ public class LoginController {
     @RequestMapping(value = "/registerUser", method = RequestMethod.POST)
     @ResponseBody
     public int RegisterUser(User user){
+        int i = userService.selectUserByName(user.getUsername());
+        if (i != 0) { //有重复的
+            return 0;
+        }
+        user.setRoleType(1);
         return userService.insertUser(user);
     }
 //    判断用户名是否重用

@@ -1,7 +1,12 @@
 package com.model;
 
+import com.alibaba.fastjson.annotation.JSONField;
+import org.springframework.beans.factory.annotation.Required;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 实体类：用户
@@ -25,7 +30,16 @@ public class User implements Serializable{
     private boolean rememberMe;  //记住密码
     @Transient
     private Integer classId;  //当前所处的班级
+    @Transient
+    private List<Menu> menuList; //存储对应角色的菜单
 
+    public List<Menu> getMenuList() {
+        return menuList;
+    }
+
+    public void setMenuList(List<Menu> menuList) {
+        this.menuList = menuList;
+    }
 
     public Integer getClassId() {
         return classId;

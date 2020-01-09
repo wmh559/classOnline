@@ -334,12 +334,14 @@ public class ManagerController {
     //重置密码
     @ResponseBody
     @RequestMapping("/resetPassword")
+    @LoginRequired
     public int ChangePassword(@RequestBody User user){
         return userService.changeUser(user);
     }
 
     //删除用户
     @RequestMapping("/deleteUser")
+    @LoginRequired
     public void deleteUser(int id,HttpServletResponse response) throws IOException {
         int i = userService.deleteUser(id);
         response.sendRedirect("/manage/toListUser.do");

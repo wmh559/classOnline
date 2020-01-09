@@ -1071,6 +1071,7 @@ h5.left-nav-title {
 /*--------------------------------------------*/
 
 .white-box {
+	box-shadow: 0 5px 15px -5px rgba(0,0,0,.5);
     background: #FFF;
     padding: 20px;
     float: left;

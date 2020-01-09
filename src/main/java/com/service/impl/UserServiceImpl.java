@@ -1,13 +1,18 @@
 package com.service.impl;
 
+import com.alibaba.fastjson.JSON;
+import com.dao.MenuDao;
 import com.dao.UserDao;
+import com.model.Menu;
 import com.model.User;
 import com.service.UserService;
+import com.utils.MenuBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author Atom
@@ -18,6 +23,8 @@ import java.util.List;
 public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
+    @Autowired
+    MenuDao menuDao;
 
     /**
      * select * from user where id = ?
@@ -36,7 +43,9 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * select * from user where username = ? and password = ?
+     * select * from user where username = ? and password = ?;
+     *
+     * select * from
      * @param username
      * @param password
      * @return
@@ -48,6 +57,16 @@ public class UserServiceImpl implements UserService {
         criteria.andEqualTo("username", username);
         criteria.andEqualTo("password", password);
         User user = userDao.selectOneByExample(example);
+
+        if (user != null) {
+            Integer roleType = user.getRoleType();
+            if (roleType == null) {
+                roleType = 1;  //学生权限
+            }
+            List<Menu> menuList = menuDao.selectMenuByRoleType(user.getRoleType());
+            user.setMenuList(menuList);
+        }
+
         return user;
     }
 
